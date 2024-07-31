@@ -42,6 +42,7 @@ export const postsRepository = {
 
     async  findBlogNameById (blogId: ObjectId) {
         const blog = await blogCollection.findOne({_id: blogId})
+        console.log(blog?.name)
         return blog?.name
     },
 
@@ -50,10 +51,9 @@ export const postsRepository = {
         return this.postMapForRender(post as any)
     },
 
-    postMapForRender(post: PostDBTypeResponse) {
+    async postMapForRender(post: PostDBTypeResponse) {
         const {createdAt, title, shortDescription, content, _id, blogId} = post
-        const blogName = this.findBlogNameById(new ObjectId(post.blogId))
-        console.log(blogName)
+        const blogName = await this.findBlogNameById(new ObjectId(post.blogId))
         return {
             id: _id,
             title,
