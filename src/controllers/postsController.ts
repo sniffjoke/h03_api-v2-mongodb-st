@@ -30,7 +30,8 @@ export const postController = async (req: Request, res: Response) => {
     try {
         const blog = await blogsRepository.findBlogById(new ObjectId(req.body.blogId))
         const newPost = await postsRepository.create({...req.body, blogName: blog?.name})
-        res.status(201).json(newPost)
+        const newPostMap = await postsRepository.postMapForRender(newPost)
+        res.status(201).json(newPostMap)
     } catch (e) {
         res.status(500).send(e)
     }
