@@ -38,6 +38,9 @@ router.route('/:id')
     .delete(
         authMiddleware,
         idBlogValidator,
+        nameBlogValidator,
+        websiteUrlValidator,
+        descriptionBlogValidator,
         errorMiddleware,
         deleteController
     )
