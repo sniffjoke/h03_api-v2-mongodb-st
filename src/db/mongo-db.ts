@@ -11,6 +11,7 @@ export const postCollection: Collection<PostDBType> = db.collection<PostDBType>(
 
 // проверка подключения к бд
 export const connectToDB = async () => {
+
     try {
         await client.connect()
         console.log('connected to db')
