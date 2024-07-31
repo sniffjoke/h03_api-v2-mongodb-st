@@ -32,15 +32,15 @@ router.route('/:id')
     .put(
         authMiddleware,
         idBlogValidator,
+        nameBlogValidator,
+        websiteUrlValidator,
+        descriptionBlogValidator,
         errorMiddleware,
         putController
     )
     .delete(
         authMiddleware,
         idBlogValidator,
-        nameBlogValidator,
-        websiteUrlValidator,
-        descriptionBlogValidator,
         errorMiddleware,
         deleteController
     )
