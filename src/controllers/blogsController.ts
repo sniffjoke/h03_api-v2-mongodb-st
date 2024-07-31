@@ -1,5 +1,4 @@
 import {Request, Response} from 'express';
-import {blogCollection, postCollection} from "../db/mongo-db";
 import {ObjectId} from "mongodb";
 import {blogsRepository} from "../repositories/blogsRepository";
 
@@ -18,7 +17,8 @@ export const getControllerById = async (req: Request, res: Response) => {
 export const postController = async (req: Request, res: Response) => {
     try {
         const newBlog = await blogsRepository.create(req.body)
-        res.status(201).json(newBlog)
+        const newBlogMap = await blogsRepository.blogMapForRender(newBlog)
+        res.status(201).json(newBlogMap)
     } catch (e) {
         res.status(500).send(e)
     }
