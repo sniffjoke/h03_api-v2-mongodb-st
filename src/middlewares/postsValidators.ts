@@ -1,7 +1,5 @@
 import {body, param} from "express-validator";
 import {postsRepository} from "../repositories/postsRepository";
-import {PostDBType} from "../types/db.interface";
-import {PostDBTypeResponse} from "../types/db.response.interface";
 import {blogsRepository} from "../repositories/blogsRepository";
 import {ObjectId} from "mongodb";
 
@@ -41,6 +39,6 @@ export const idPostValidator = param('id')
         } else {
             return !!post
         }
-        // return !!blog
+        // return !!post
     }).withMessage('Пост с заданным id не найден!')
 

@@ -33,6 +33,7 @@ router.route('/')
 router.route('/:id')
     .put(
         authMiddleware,
+        idPostValidator,
         titlePostValidator,
         contentPostValidator,
         blogIdValidator,

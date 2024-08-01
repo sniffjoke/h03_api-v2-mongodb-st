@@ -39,11 +39,6 @@ export const postsRepository = {
         return updatedPost
     },
 
-    async  findBlogNameById (blogId: ObjectId) {
-        const blog = await blogCollection.findOne({_id: blogId})
-        return blog?.name
-    },
-
     async findPostForRender(postId: ObjectId) {
         const post = await this.findPostById(postId)
         return this.postMapForRender(post as any)
