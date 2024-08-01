@@ -2,14 +2,13 @@ import {PostDBType} from "../types/db.interface";
 import {blogCollection, postCollection} from "../db/mongo-db";
 import {DeleteResult, ObjectId, UpdateResult} from "mongodb";
 import {PostDBTypeResponse} from "../types/db.response.interface";
-import {blogsRepository} from "./blogsRepository";
-import {Request, Response} from "express";
 
 
 export const postsRepository = {
     async getAllPosts() {
         const posts = await postCollection.find().toArray()
         return posts.map((post: any) => this.postMapForRender(post))
+        // const blogName = await this.findBlogNameById(new ObjectId(post.blogId))
     },
 
     async create(newPost: PostDBType): Promise<any> {
@@ -42,7 +41,6 @@ export const postsRepository = {
 
     async  findBlogNameById (blogId: ObjectId) {
         const blog = await blogCollection.findOne({_id: blogId})
-        console.log(blog?.name)
         return blog?.name
     },
 
@@ -51,9 +49,8 @@ export const postsRepository = {
         return this.postMapForRender(post as any)
     },
 
-    async postMapForRender(post: PostDBTypeResponse) {
-        const {createdAt, title, shortDescription, content, _id, blogId} = post
-        const blogName = await this.findBlogNameById(new ObjectId(post.blogId))
+    postMapForRender(post: PostDBTypeResponse) {
+        const {createdAt, blogName, title, shortDescription, content, _id, blogId} = post
         return {
             id: _id,
             title,

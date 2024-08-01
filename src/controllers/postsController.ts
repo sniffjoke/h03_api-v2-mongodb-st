@@ -7,6 +7,7 @@ import {blogsRepository} from "../repositories/blogsRepository";
 export const getController = async (req: Request, res: Response) => {
     try {
         const posts = await postsRepository.getAllPosts()
+        console.log(posts)
         res.status(200).json(posts)
     } catch (e) {
         res.status(500).send(e)
@@ -17,9 +18,7 @@ export const getController = async (req: Request, res: Response) => {
 export const getControllerById = async (req: Request, res: Response) => {
     try {
         const postId = new ObjectId(req.params.id)
-        console.log(postId)
         const post = await postsRepository.findPostForRender(postId)
-        console.log(post)
         res.status(200).json(post)
     } catch (e) {
         res.status(500).send(e)
