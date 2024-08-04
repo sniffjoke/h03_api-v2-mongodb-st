@@ -1,5 +1,5 @@
 import {PostDBType} from "../types/db.interface";
-import {blogCollection, postCollection} from "../db/mongo-db";
+import {postCollection} from "../db/mongo-db";
 import {DeleteResult, ObjectId, UpdateResult} from "mongodb";
 import {PostDBTypeResponse} from "../types/db.response.interface";
 
@@ -8,7 +8,6 @@ export const postsRepository = {
     async getAllPosts() {
         const posts = await postCollection.find().toArray()
         return posts.map((post: any) => this.postMapForRender(post))
-        // const blogName = await this.findBlogNameById(new ObjectId(post.blogId))
     },
 
     async create(newPost: PostDBType): Promise<any> {
